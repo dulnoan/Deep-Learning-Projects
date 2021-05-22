@@ -1,0 +1,37 @@
+'''
+Backtracking Algorithm Example:
+Starting airport X what is the sequence of stop overs covering all airports
+>>> flights = [('ORD','EWR'), ('ATL','SFO'), ('SFO','ORD'), ('NYC','ATL')]
+>>> # Eventual itinerary to arrive at...
+>>> itinerary = ['NYC', 'ATL', 'SFO', 'ORD', 'EWR']
+'''
+
+
+def get_itinerary(flights, start):
+    
+    itinerary_list = []
+
+    itinerary_list.append(start[0])
+
+#loop through X number of times for each stopover to ensure we stop at each stopover
+    for x in range(len(flights)): 
+
+#loop through each stopover (tuple) as pairwise 'a' and 'b' 
+        for a,b in flights: 
+            
+#example if a = tuple a, add next stop tuple 'b' to itinerary
+#then remove 'a' and 'b' from flight list (remaining connections)
+
+            if a == itinerary_list[-1]: 
+                itinerary_list.append(b)
+                flights.remove((a,b)) 
+                
+                print("Current stop", a)
+                print("Next stop ",itinerary_list[-1])
+                print("Remaining stop overs:",flights)
+                print("Itinerary so far:",itinerary_list,"\n")
+        
+    return itinerary_list
+
+flights = [('ORD','EWR'), ('ATL','SFO'), ('SFO','ORD'), ('NYC','ATL')]
+print(get_itinerary(flights, ['NYC']))
