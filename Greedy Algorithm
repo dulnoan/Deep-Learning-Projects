@@ -1,0 +1,38 @@
+'''
+Greedy Algorithm 
+
+What is the minimum number of coins to return X amount of change with coins denominated in either 1, 2, 5, 10, 20, 50, 100
+
+The python function takes in a value of X and returns the minimum number of coins that returns X value.
+
+'''
+
+
+def make_change(change_value):
+    deno = [1,2,5,10,20,50,100]  #important to order coins from low to high
+    n = len(deno)
+    
+    change = []
+    
+    # sequence through all denominations highest to lowest
+    i = n-1 # minus 1 due to index starting at 0
+    while (i >= 0):
+        # find denominations
+        while (change_value >= deno[i]): #change_value will be reduced after each iteration and find next highest denomination
+            change_value -= deno[i]  #subtract value of coin from remaining outstanding balance
+            change.append(deno[i]) #Add coin to list
+        
+        i -=1
+    
+    return change
+    
+change_value = 97
+print("Minimal number of change for", change_value, ": ") 
+change = make_change(V)
+print(change)
+
+'''
+Minimal number of coins for 97 : 
+[50, 20, 20, 5, 2]
+
+'''
